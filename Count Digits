@@ -11,7 +11,7 @@ Input: n = 12
 Output: 2
 Explanation: 1, 2 when both divide 12 leaves remainder 0.
 
-tc O(n) sc O(1)
+tc O(log10(n)) becsuse we are dividing 10    sc O(1)
 class Solution{
     static int evenlyDivides(int N){
         // code here
@@ -28,3 +28,23 @@ class Solution{
        
     }
 }
+another approach tc O(1) sc O(1)
+ // store the count of digits.
+        int cnt = (int) (Math.log10(n) + 1);
+
+        // The expression (int)(Math.log10(n) + 1)
+        // calculates the number of digits in 'n'
+        // and casts it to an integer.
+
+        // Adding 1 to the result accounts
+        // for the case when 'n' is a power of 10,
+        // ensuring that the count is correct.
+
+        // Finally, the result is cast
+        // to an integer to ensure it is rounded
+        // down to the nearest whole number.
+
+        // Return the count of digits in 'n'.
+        return cnt;
+    }
+
