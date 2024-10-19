@@ -1,0 +1,51 @@
+
+Difficulty: EasyAccuracy: 43.37%Submissions: 170K+Points: 2
+Given a positive integer N., The task is to find the value of Σi from 1 to N F(i) where function F(i) for the number i is defined as the sum of all divisors of i.
+
+Example 1:
+
+Input:
+N = 4
+Output:
+15
+Explanation:
+F(1) = 1
+F(2) = 1 + 2 = 3
+F(3) = 1 + 3 = 4
+F(4) = 1 + 2 + 4 = 7
+ans = F(1) + F(2) + F(3) + F(4)
+    = 1 + 3 + 4 + 7
+    = 15
+class Solution{  tc O(n^2) sc O(1)
+    static long sumOfDivisors(int N){
+         long ans=0;
+        int i=1;
+        int j=1;
+        while(i<=N){
+            int sum=0;
+            j=1;
+            while(j<=i){
+                if(i%j==0){
+                    sum+=j;
+                }
+                    j++;
+            }
+            ans+=sum;
+            i++;
+        }
+        return ans;
+        
+    }
+}
+
+optimal approach tc O(N) sc O(1)
+class Solution{
+    static long sumOfDivisors(int N){
+        // code here
+        long ans=0;
+        for(int i=1;i<=N;i++){
+            ans+=(N/i)*i;
+        }
+        return ans;
+    }
+}
