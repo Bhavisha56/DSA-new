@@ -1,0 +1,22 @@
+
+Difficulty: EasyAccuracy: 77.72%Submissions: 73K+Points: 2
+Print numbers from N to 1 (space separated) without the help of loops.
+
+Example 1:
+
+Input:
+N = 10
+Output: 10 9 8 7 6 5 4 3 2 1
+
+class Solution { tc O(n) sc O(n)
+   
+    
+    void printNos(int N) {
+        // code here
+    System.out.print(N+" ");
+    N--;
+    if(N==0)return ;
+    
+    printNos(N);
+    }
+}
