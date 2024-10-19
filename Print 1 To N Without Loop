@@ -1,0 +1,32 @@
+Difficulty: BasicAccuracy: 61.33%Submissions: 243K+Points: 1
+Print numbers from 1 to n without the help of loops. You only need to complete the function printNos() that takes N as parameter and prints number from 1 to N recursively.
+
+Don't print newline, it will be added by the driver code.
+
+Examples
+
+Input: n = 10
+Output: 1 2 3 4 5 6 7 8 9 10
+
+using recursion TcO(n) sc O(n)
+class Solution {
+    public void print(int n, int i) {
+        // Base case: If i is greater than n, stop recursion
+        if (i > n) {
+            return;
+        }
+        
+        // Print the current number
+        System.out.print(i + " ");
+        
+        // Recursive call to print the next number
+        print(n, i + 1);
+    }
+    
+    public void printNos(int N) {
+        // Start from 1 and print numbers up to N
+        print(N, 1);
+        System.out.println(); // Move to the next line after printing
+    }
+}
+
