@@ -1,0 +1,40 @@
+Difficulty: EasyAccuracy: 22.3%Submissions: 337K+Points: 2
+Given a positive integer n, find the nth fibonacci number. Since the answer can be very large, return the answer modulo 1000000007.
+
+Note: for the reference of this question take first fibonacci number to be 1.
+
+Examples :
+
+Input: n = 2
+Output: 1 
+Explanation: 1 is the 2nd number of fibonacci series.
+
+
+//User function Template for Java
+Tc O(n) sc O(n)
+class Solution {
+    static int nthFibonacci(int n){
+        // code here'
+        
+        int fib[]=new int[n+1];
+        fib[1]=1;
+        fib[2]=1;
+        for(int i=3;i<=n;i++){
+            fib[i]=(fib[i-1]+fib[i-2])%1000000007;
+        }
+        return fib[n]%1000000007;
+        
+    }
+}
+//User function Template for Java
+class Solution { recursion tc O(2^n) sc O(n)
+    static int nthFibonacci(int n){
+        // code here
+        if(n<=1){
+            return n; 
+        }
+        int first= nthFibonacci(n-1);
+        int last= nthFibonacci(n-2);
+        return first+last;
+    }
+}
