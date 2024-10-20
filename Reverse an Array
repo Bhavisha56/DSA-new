@@ -1,0 +1,50 @@
+
+Difficulty: EasyAccuracy: 55.32%Submissions: 28K+Points: 2
+You are given an array of integers arr . Your task is to reverse the given array and return the reversed array.
+
+Examples:
+
+Input: arr = [1, 2, 3, 4]
+Output: [4, 3, 2, 1]
+Explanation: The elements of the array are 1 2 3 4. After reversing the array, the first element goes to the last position,
+the second element goes to the second last position and so on. Hence, the answer is 4 3 2 1.
+
+tc O(n) sc O(1)
+class Solution {
+    public void swap(int arr[],int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    public void reverseArray(int arr[]) {
+        // code here
+        int n=arr.length;
+        int i=0;
+        int j=n-1;
+      while(i<=j){
+          swap(arr,i,j);
+          i++;
+          j--;
+      }
+    }
+}
+
+using recursion tc O(n) sc O(n)
+
+
+class Solution {
+    public void rev(int arr[],int i,int j){
+  
+
+        if(i<j){
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        rev(arr,i+1,j-1);
+        }
+    }
+    public void reverseArray(int arr[]) {
+        int n=arr.length;
+         rev(arr,0,n-1);
+    }
+}
