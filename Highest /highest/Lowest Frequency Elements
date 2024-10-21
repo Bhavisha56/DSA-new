@@ -1,0 +1,58 @@
+
+Moderate
+80/80
+Average time to solve is 25m
+Contributed by
+212 upvotes
+Asked in company
+Problem statement
+Given an array 'v' of 'n' numbers.
+
+
+
+Your task is to find and return the highest and lowest frequency elements.
+
+
+
+If there are multiple elements that have the highest frequency or lowest frequency, pick the smallest element.
+
+
+
+Example:
+Input: ‘n' = 6, 'v' = [1, 2, 3, 1, 1, 4]
+
+Output: 1 2
+
+appraoch using hashmap O(N) sc O(n)
+import java.util.HashMap;
+
+public class Solution {
+    public static int[] getFrequencies(int []v) {
+        // Write Your Code Here
+        int []arr=new int[2];
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        for(int i=0;i<v.length;i++){
+            mp.put(v[i],mp.getOrDefault(v[i],0)+1);
+        }
+          int min=Integer.MAX_VALUE;
+          int max=Integer.MIN_VALUE;
+          int maxi=-1;
+          int maxi2=-1;
+         for(HashMap.Entry<Integer,Integer> entry:mp.entrySet()){
+             int key=entry.getKey();
+             int freq=entry.getValue();
+           if (freq > max || (freq == max && key < maxi)) {
+                max = freq;
+                maxi = key;
+            }
+            if (freq < min || (freq == min && key <maxi2)) {
+                min = freq;
+                maxi2= key;
+            }
+
+         }  
+          arr[0]=maxi;
+          arr[1]=maxi2;
+          return arr;
+    }
+}
