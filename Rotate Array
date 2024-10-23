@@ -1,0 +1,31 @@
+Difficulty: MediumAccuracy: 37.06%Submissions: 356K+Points: 4
+Given an unsorted array arr[]. Rotate the array to the left (counter-clockwise direction) by d steps, where d is a positive integer. Do the mentioned change in the array in place.
+
+Note: Consider the array as circular.
+
+Examples :
+
+Input: arr[] = [1, 2, 3, 4, 5], d = 2
+Output: [3, 4, 5, 1, 2]
+Explanation: when rotated by 2 elements, it becomes 3 4 5 1 2
+
+// User function Template for Java
+tc O(n) sc O(n)
+class Solution {
+    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotateArr(int arr[], int d) {
+        // add your code here
+        ArrayList<Integer> li=new ArrayList<>();
+        int n=arr.length;
+        d=d%n;
+        for(int i=d;i<n;i++){
+            li.add(arr[i]);
+        }
+        for(int i=0;i<d;i++){
+            li.add(arr[i]);
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=li.get(i);
+        }
+    }
+}
