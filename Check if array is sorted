@@ -1,0 +1,37 @@
+
+Difficulty: EasyAccuracy: 39.37%Submissions: 219K+Points: 2
+Given an array arr[], check whether it is sorted in non-decreasing order. Return true if it is sorted otherwise false.
+
+Examples:
+
+Input: arr[] = [10, 20, 30, 40, 50]
+Output: true
+Explanation: The given array is sorted.
+                       
+class Solution {  tcO(n^2) sc O(1)
+    public boolean arraySortedOrNot(List<Integer> arr) {
+        // code here
+        for(int i=0;i<arr.size();i++){
+            for(int j=i+1;j<arr.size();j++){
+            if(arr.get(j)<arr.get(i)){
+               return false;
+            }
+            }
+        }
+     return true;
+        
+    }
+
+
+optimal 
+class Solution { tcO(n) sc O(1)
+    public boolean arraySortedOrNot(List<Integer> arr) {
+        // code here
+        for(int i=1;i<arr.size();i++){
+           if(arr.get(i)<arr.get(i-1)){
+         return false;
+           }
+        }
+               return true;
+        
+    }
