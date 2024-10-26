@@ -1,4 +1,10 @@
 public class tUf { tc O(n) sc(ON)
+
+
+***using a list to store the elements which are nonzero in list in one loop  then traverse the another loop from 0 to list size and copy all element in array then 
+anothrer for loop run from list size to array size and fill them with zero***
+
+
     public static int[] moveZeros(int n, int []a) {
         //temporary array:
         ArrayList<Integer> temp = new ArrayList<>();
