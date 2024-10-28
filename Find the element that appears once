@@ -1,0 +1,29 @@
+Difficulty: MediumAccuracy: 53.69%Submissions: 89K+Points: 4
+Given a sorted array arr[] of n positive integers having all the numbers occurring exactly twice, except for one number which will occur only once. Find the number occurring only once.
+
+Examples :
+
+Input: n = 5, arr[] = {1, 1, 2, 5, 5}
+Output: 2
+Explanation: Since 2 occurs once, while other numbers occur twice, 2 is the answer.
+
+approach 1 tc O(n) sc O(N)
+
+// User function Template for Java
+
+class Sol {
+    public static int search(int n, int arr[]) {
+        // your code here
+        HashMap<Integer,Integer> mp=new HashMap<>();
+        for(int i=0;i<n;i++){
+            mp.put(arr[i],mp.getOrDefault(arr[i],0)+1);
+        }
+        int ans=-1;
+        for(Map.Entry<Integer,Integer> entry:mp.entrySet()){
+            if(entry.getValue()==1){
+                ans=entry.getKey();
+            }
+        }
+        return ans;
+    }
+}
