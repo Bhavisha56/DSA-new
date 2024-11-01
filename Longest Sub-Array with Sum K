@@ -46,6 +46,26 @@ class Solution {
                 map.put(sum,i);
             }
         }
-        return maxL;
+appraoch 3
+class Solution {
+    public int lenOfLongestSubarr(int[] arr, int k) {
+        // code here
+        int i=0;
+        int j=0;
+        long sum=arr[0];
+        int max=0;
+        int n=arr.length;
+        while(j<n){
+            while(i<=j && sum>k){
+                sum-=arr[i++];
+            }
+            if(sum==k){
+                max=Math.max(max,j-i+1);
+            }
+            j++;
+            if(j<n)sum+=arr[j];
+        }
+        return max;
     }
 }
+
