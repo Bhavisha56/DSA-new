@@ -1,0 +1,67 @@
+Difficulty: MediumAccuracy: 29.18%Submissions: 277K+Points: 4
+The cost of stock on each day is given in an array A[] of size N. Find all the segments of days on which you buy and sell the stock such that the sum of difference between sell and buy prices is maximized. Each segment consists of indexes of two elements, first is index of day on which you buy stock and second is index of day on which you sell stock.
+Note: Since there can be multiple solutions, the driver code will print 1 if your answer is correct, otherwise, it will return 0. In case there's no profit the driver code will print the string "No Profit" for a correct solution.
+
+Example 1:
+
+Input:
+N = 7
+A[] = {100,180,260,310,40,535,695}
+Output:
+1
+Explanation:
+One possible solution is (0 3) (4 6)
+We can buy stock on day 0,
+and sell it on 3rd day, which will 
+give us maximum profit. Now, we buy 
+stock on day 4 and sell it on day 6.
+
+appraoch 1 O(N) sc O(n)
+
+class Solution{
+    //Function to find the days of buying and selling stock for max profit.
+    ArrayList<ArrayList<Integer> > stockBuySell(int A[], int n) {
+        // code here
+         ArrayList<ArrayList<Integer> > ans =new ArrayList<>();
+         for(int i=0;i<n-1;i++){
+             if(A[i+1]>A[i]){
+                 ArrayList<Integer> li=new ArrayList<>();
+                 li.add(i);
+                 li.add(i+1);
+                 ans.add(li);
+             }
+         }
+         return ans;
+        
+    }
+}
+
+
+
+brute appraocch tc O(n^2) sc O(1)
+ static int maxProfit(int[] arr) {
+        int maxPro = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] > arr[i]) {
+                    maxPro = Math.max(arr[j] - arr[i], maxPro);
+                }
+            }
+        }
+        return maxPro;
+    }
+}
+
+optimal appraoch tc O(n) sc O(1)
+   }
+    static int maxProfit(int[] arr) {
+    int maxPro = 0;
+    int minPrice = Integer.MAX_VALUE;
+    for (int i = 0; i < arr.length; i++) {
+        minPrice = Math.min(minPrice, arr[i]);
+        maxPro = Math.max(maxPro, arr[i] - minPrice);
+    }
+    return maxPro;
+    }
+}
+
