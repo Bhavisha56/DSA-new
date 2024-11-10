@@ -1,0 +1,54 @@
+Difficulty: MediumAccuracy: 45.84%Submissions: 397+Points: 4
+Given a Matrix arr of size n x m, the task is to set all rows and columns to zeroes if a particular element is zero, in constant space complexity.
+
+Examples:
+
+Input: arr[][] = [[1, 1, 1],
+                  [1, 0, 1],
+                  [1, 1, 1]]
+Output: [[1, 0, 1],
+         [0, 0, 0],
+         [1, 0, 1]]
+
+bruteforce tcTime Complexity: O((N*M)*(N + M)) + O(N*M),
+/Back-end complete function Template for Java
+class Solution {
+    void markrow(int [][]arr,int n,int m,int i){
+        for(int j=0;j<m;j++){
+            if(arr[i][j]!=0){
+                arr[i][j]=-1;
+            }
+        }
+    }
+     void markcol(int [][]arr,int n,int m,int j){
+        for(int i=0;i<n;i++){
+            if(arr[i][j]!=0){
+                arr[i][j]=-1;
+            }
+        }
+    }
+    public void setMatrixZeroes(int[][] arr) {
+        
+        int n=arr.length;
+        int m=arr[0].length;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(arr[i][j]==0){
+                    markrow(arr,n,m,i);
+                    markcol(arr,n,m,j);
+                }
+            }
+        }
+           for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(arr[i][j]==-1){
+                   arr[i][j]=0;
+                }
+            }
+        }
+        
+        
+    }
+    
+}
