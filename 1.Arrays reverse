@@ -1,0 +1,18 @@
+Reverse a String
+Difficulty: BasicAccuracy: 69.49%Submissions: 380K+Points: 1
+You are given a string s, and your task is to reverse the string.
+
+Examples:
+
+Input: s = "Geeks"
+Output: "skeeG"
+
+approach 1 
+class Solution {
+    public static String reverseString(String s) {
+        // code here
+        String sb=new StringBuilder(s).reverse().toString();   using library to reverse taking tc O(n) sc O(n) 
+        return sb;
+        
+    }
+}
