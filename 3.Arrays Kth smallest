@@ -1,0 +1,67 @@
+Kth Smallest
+Difficulty: MediumAccuracy: 35.17%Submissions: 658K+Points: 4
+Given an array arr[] and an integer k where k is smaller than the size of the array, the task is to find the kth smallest element in the given array.
+
+Follow up: Don't solve it using the inbuilt sort function.
+
+Examples :
+
+Input: arr[] = [7, 10, 4, 3, 20, 15], k = 3
+Output:  7
+Explanation: 3rd smallest element in the given array is 7.
+
+bruteappraoch : using arrayssort function but tc O(nlogn)
+
+optimized appraoch:using maxHeap as it stored N-K element in heap so tc O(nlogK) sc O(K) . we can also use minheap but the tc O(nlogn) because we are storing all n element in heap.
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        // Your code here
+        PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int i=0;i<k;i++){
+            pq.add(arr[i]);
+        }
+          
+          for(int i=k;i<arr.length;i++){
+              if(arr[i]<pq.peek()){
+                  pq.poll();
+                  pq.add(arr[i]);
+              }
+          }
+          return pq.peek();
+    }
+}
+
+more optimized :counting sort tc O(n+(maxele) sc O(max)
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        // Your code here
+        int max=arr[0];
+        int n=arr.length;
+        for(int i=1;i<n;i++){
+            if(arr[i]>max){                    
+                max=arr[i];
+            }
+        }
+        int num[]=new int[max+1];
+        for(int i=0;i<n;i++){
+            num[arr[i]]++;
+        }
+        
+        int cnt=0;
+        for(int i=0;i<=max;i++){
+            if(num[i]!=0){
+                cnt+=num[i];
+                if(cnt>=k){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+}
+
+s-1 find max element
+s-2  make freqarr[max+1]
+s-3 intitalize cnt=0;
+s-4 find the number whose frq!=0 then incease cnt+=frq[i] element then check if(cnt>=k)return i if found 
+
