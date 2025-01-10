@@ -1,0 +1,51 @@
+Middle of a Linked List
+Given the head of a linked list, the task is to find the middle. For example, the middle of 1-> 2->3->4->5 is 3. If there are two middle nodes (even count), return the second middle. For example, middle of 1->2->3->4->5->6 is 4.
+
+appraoch 1 using mid finding cnt variable 
+tc O(n)) sc O(1)
+
+class Solution {
+    int getMiddle(Node head) {
+        
+        int cnt = 0;
+        Node temp = head;
+
+        while (temp != null) {
+            temp = temp.next;
+            cnt++;
+        }
+
+        int mid = (cnt / 2) + 1;
+
+        // Traverse to the middle node
+        Node ans = head;
+        for (int i = 1; i < mid; i++) {
+            ans = ans.next;
+        }
+
+        return ans.data;
+    }
+}
+
+appraoch 2 using tortoise and hare technique tc O(n) sc O(1)
+
+class Solution {
+    int getMiddle(Node head) {
+        // Edge case: If the linked list is empty
+        if (head == null) return -1;
+
+        // Initialize slow and fast pointers
+        Node slow = head;
+        Node fast = head;
+
+        // Move `fast` by 2 steps and `slow` by 1 step
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // `slow` now points to the middle node
+        return slow.data;
+    }
+}
+
