@@ -1,0 +1,96 @@
+Merge two sorted linked lists
+Difficulty: MediumAccuracy: 62.91%Submissions: 161K+Points: 4
+Given two sorted linked lists consisting of nodes respectively. The task is to merge both lists and return the head of the merged list.
+
+Examples:
+
+Input: LinkedList1: 5->10->15->40, ListedList2: 2->3->20
+Output: 2->3->5->10->15->20->40
+
+
+brute force tc O(N+m) sc O(n+M) using 3 stack and the playing with tops imp only start adding the greater node in 3stack.
+code
+class Solution {
+    // Function to merge two sorted linked list.
+
+    Node sortedMerge(Node head1, Node head2) {
+        // This is a "method-only" submission.
+        // You only need to complete this method
+        Stack<Node> A=new Stack<>();
+        Stack<Node> B=new Stack<>();
+        Stack<Node> C=new Stack<>();
+
+        
+        
+        Node tempA=head1;
+        while(tempA!=null){
+            A.push(tempA);
+            tempA=tempA.next;
+        }
+        
+         Node tempB=head2;
+        while(tempB!=null){
+            B.push(tempB);
+            tempB=tempB.next;
+        }
+        
+         while(A.size()>0 && B.size()>0){
+             Node TopA=A.peek();
+             Node TopB=B.peek();
+             if(TopA.data>=TopB.data){
+                 C.push(A.pop());
+             }else{
+                 C.push(B.pop());
+             }
+         }
+         while(A.size()>0){
+            C.push(A.pop());
+         }
+         while(B.size()>0){
+            //  Node dataB=B.peek();
+             C.push(B.pop());
+         }
+       Node newhead=null;
+       Node curr=null;
+       while(!C.isEmpty()){
+           Node node=C.pop();
+           if(newhead==null){
+               newhead=node;
+               curr=node;
+           }else{
+                curr.next = node;
+               curr=curr.next;
+           }
+           curr.next=null;
+       }
+       return newhead;
+    }
+}
+
+optimal approach using an dummy node and the start connecting the smaller nodes to the curr 
+code
+class Solution {
+    // Function to merge two sorted linked list.
+    Node sortedMerge(Node head1, Node head2) {
+        // This is a "method-only" submission.
+        // You only need to complete this method
+        Node dummy=new Node(-1);
+        Node curr=dummy;
+        while(head1!=null && head2!=null){
+            if(head1.data<=head2.data){
+                curr.next=head1;
+                head1=head1.next;
+            }else{
+                curr.next=head2;
+                head2=head2.next;
+            }
+            curr=curr.next;
+        }
+         if (head1 != null) {
+            curr.next = head1;
+        } else {
+            curr.next = head2;
+        }
+        return dummy.next;
+        
+    }
