@@ -1,0 +1,65 @@
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+Example 1:
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+
+changing links of delete node
+Time Complexity: O(L)+O(L-N), We are calculating the length of the linked list and then iterating up to the (L-N)th node of the linked list, where L is the total length of the list.
+sc:O(1)
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        int cnt=0;
+        ListNode temp=head;
+        while(temp!=null){
+            temp=temp.next;
+            cnt++;
+        }
+        int res=cnt-n;
+        temp=head;
+        while(res!=0){
+           res--;
+           if(res==0){
+            break;
+           }
+           temp=temp.next;
+        }
+         if (cnt == n) {
+            ListNode newhead = head.next;
+            head = null;
+            return newhead;
+        }
+        ListNode delNode=temp.next;
+        temp.next=temp.next.next;
+        delNode=null;
+        return head;
+
+    }
+}
+
+optimal approach
+using two pointer slow and faster 
+s-1 move fast to the till N;
+s-2 then move fast and slow till fast.next!=null
+s-3 then change the links 
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode slow=head;
+        ListNode fast=head;
+
+       for (int i = 0; i < n; i++)
+            fast = fast.next;
+
+        if(fast==null){
+            return head.next;
+        }
+        while(fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        ListNode delnode=slow.next;
+        slow.next=slow.next.next;
+        delnode=null;
+        return head;
+    }
+}
