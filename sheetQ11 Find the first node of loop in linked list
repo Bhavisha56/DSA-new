@@ -1,0 +1,51 @@
+Find the first node of loop in linked list
+Difficulty: EasyAccuracy: 55.49%Submissions: 50K+Points: 2
+Given a singly linked list's head. Find the first node of the loop if the linked list has a loop. If a loop is present return the node data of the first node of the loop else return NULL.
+
+Examples:
+
+Input:
+ 
+Output: 3
+Explanation: We can see that there exists a loop in the given linked list and the first node of the loop is 3.
+brute force using hashmap O(N) sc O(N)
+if already present in map then return
+class Solution {
+    // Function to find first node if the linked list has a loop.
+    public static Node findFirstNode(Node head) {
+        // code here
+        HashMap<Node,Boolean> mp=new HashMap<>();
+        Node temp=head;
+        while(temp!=null){
+            if(mp.containsKey(temp)){
+                return temp;
+            }
+            mp.put(temp,true);
+            temp=temp.next;
+        }
+        return new Node(-1);
+    }
+}
+optimal approach using fast and slow pointer and tc O(N) scO1
+
+class Solution {
+    // Function to find first node if the linked list has a loop.
+    public static Node findFirstNode(Node head) {
+        // code here
+        Node fast=head;
+        Node slow=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+               slow = head;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow; // St
+            }
+        }
+        return new Node(-1);
+    }
+}
