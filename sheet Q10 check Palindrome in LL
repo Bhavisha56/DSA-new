@@ -1,0 +1,69 @@
+Palindrome Linked List
+Difficulty: MediumAccuracy: 41.48%Submissions: 349K+Points: 4
+Given a singly linked list of integers. The task is to check if the given linked list is palindrome or not.
+
+Examples:
+
+Input: LinkedList: 1->2->1->1->2->1
+Output: true
+Explanation: The given linked list is 1->2->1->1->2->1 , which is a palindrome and Hence, the output is true.
+
+brute approach using stack tc O(N) sc O(N)
+class Solution {
+    // Function to check whether the list is palindrome.
+    boolean isPalindrome(Node head) {
+        // Your code here
+        Stack<Integer> st=new Stack<>();
+        Node temp=head;
+        while(temp!=null){
+            st.push(temp.data);
+            temp=temp.next;
+        }
+        temp=head;
+        while(!st.isEmpty()){
+            if(st.peek()==temp.data){
+                st.pop();
+            }else{
+                return false;
+            }
+            temp=temp.next;
+        }
+        return true;
+    }
+}
+optimal apprroaxh using fast and slow pointer to get midle and then reverse the secondhalf and then checking the firsthead and the secondhalfhead data equal or not; 
+tc O(N) scO(1)
+class Solution {
+    // Function to check whether the list is palindrome.
+   public Node reversed(Node head) {
+        Node temp = head;
+        Node prev = null;
+        while (temp != null) {
+            Node next = temp.next; // Store the next node
+            temp.next = prev;      // Reverse the current node
+            prev = temp;           // Move prev forward
+            temp = next;           // Move temp forward
+        }
+        return prev; // New head of the reversed list
+    }
+    boolean isPalindrome(Node head) {
+      
+      Node fast=head;
+      Node slow=head;
+      while(fast!=null && fast.next!=null){
+          slow=slow.next;
+          fast=fast.next.next;
+      }
+      Node secondhalf=reversed(slow);
+      Node firsthalf=head;
+    //   Node secondhalfcopy=secondhalf;
+      while(secondhalf!=null){
+          if(firsthalf.data!=secondhalf.data){
+              return false;
+          }
+          firsthalf = firsthalf.next;
+           secondhalf = secondhalf.next;
+      }
+      return true;
+    }
+}
