@@ -1,0 +1,72 @@
+Linked List Group Reverse
+Difficulty: HardAccuracy: 57.08%Submissions: 212K+Points: 8
+Given the head a linked list, the task is to reverse every k node in the linked list. If the number of nodes is not a multiple of k then the left-out nodes in the end, should be considered as a group and must be reversed.
+
+Examples:
+
+Input: head[] : [1, 2, 3, 4, 5, 6, 7, 8], k = 4
+Output: [4, 2, 2, 1, 8, 7, 6, 5]
+brute approach using stack tc O(N) sc O(N)
+
+
+/*node class of the linked list
+
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}
+
+*/
+
+class Solution {
+    public static Node reverseKGroup(Node head, int k) {
+        // Your code here
+         if (head == null || k <= 1) {
+            return head; // No reversal needed
+        }
+        int len=0;
+        Node temp=head;
+         while (temp != null) {
+            len++;
+            temp = temp.next;
+        }
+        Node dummy=new Node(-1);
+        dummy.next=head;
+        Node prev=dummy;
+        temp=head;
+        while(len>=k){
+            Stack<Node> st = new Stack<>();
+            for(int i=0;i<k;i++){
+                st.push(temp);
+                temp=temp.next;
+            }
+            while(!st.isEmpty()){
+                prev.next=st.pop();
+                prev=prev.next;
+            }
+            prev.next=temp;
+            len=len-k;
+        }
+        if(len>0){
+              Stack<Node> st = new Stack<>();
+            while(temp!=null){
+                st.push(temp);
+                temp=temp.next;
+            }
+            while(!st.isEmpty()){
+                prev.next=st.pop();
+                prev=prev.next;
+            }
+             prev.next=null;
+        }
+        return dummy.next;
+    }
+}
+
+optimal appraoch 
