@@ -1,0 +1,55 @@
+using brute appraoch O(N^2)+O(nlogn) sc O(n)
+code
+class Solution {
+    // Function to flatten a linked list
+    Node flatten(Node root) {
+        if (root == null || root.next == null) {
+            return root; // Base case
+        }
+
+        Node curr = root;
+
+        // Flatten the linked list by appending the `next` chain to the `bottom` chain
+        while (curr.next != null) {
+            Node temp = curr;
+
+            // Move to the last node in the `bottom` chain of the current node
+            while (temp.bottom != null) {
+                temp = temp.bottom;
+            }
+
+            // Append the next list to the bottom of the current node
+            temp.bottom = curr.next;
+
+            // Move to the next node in the `next` chain
+            curr.next = curr.next.next;
+        }
+
+        // Sort the entire list
+        return sort(root);
+    }
+
+    // Function to sort the flattened linked list
+    public static Node sort(Node head) {
+        ArrayList<Integer> values = new ArrayList<>();
+        Node temp = head;
+
+        // Step 1: Collect all values
+        while (temp != null) {
+            values.add(temp.data);
+            temp = temp.bottom;
+        }
+
+        // Step 2: Sort the values
+        Collections.sort(values);
+
+        // Step 3: Reconstruct the sorted list
+        temp = head;
+        for (int value : values) {
+            temp.data = value;
+            temp = temp.bottom;
+        }
+
+        return head;
+    }
+}
