@@ -1,4 +1,4 @@
-using brute appraoch O(N^2)+O(nlogn) sc O(n)
+using brute appraoch O(n*m*nlogn) sc O(n)
 code
 class Solution {
     // Function to flatten a linked list
@@ -51,5 +51,44 @@ class Solution {
         }
 
         return head;
+    }
+}
+optimal appraoch Flattening a Linked List using Priority Queues – O(n * m * log(n)) Time and O(n) Space
+class Solution {
+    // Function to flatten a linked list
+   class NodeComparator implements java.util.Comparator<Node> {
+      @Override
+    public int compare(Node a, Node b) {
+        return Integer.compare(a.data, b.data);
+    }
+}
+    Node flatten(Node root) {
+        // code here
+        PriorityQueue<Node> pq=new PriorityQueue<>(new NodeComparator());
+        
+        Node head=null;
+        Node tail=null;
+        
+        while(root!=null){
+            pq.add(root);
+            root=root.next;
+        }
+        while(!pq.isEmpty()){
+            Node minhead=pq.poll();
+            if(head==null){
+                head=minhead;
+                tail=minhead;
+            }else{
+                tail.bottom=minhead;
+                tail=tail.bottom;
+            }
+            
+            if(minhead.bottom!=null){
+                pq.add(minhead.bottom);
+                minhead.bottom=null;
+            }
+        }
+        return head;
+        
     }
 }
