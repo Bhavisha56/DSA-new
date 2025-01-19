@@ -1,0 +1,61 @@
+Rotate a Linked List
+Difficulty: MediumAccuracy: 39.95%Submissions: 254K+Points: 4
+Given the head of a singly linked list, your task is to left rotate the linked list k times.
+
+Examples:
+
+Input: head = 10 -> 20 -> 30 -> 40 -> 50, k = 4
+Output: 50 -> 10 -> 20 -> 30 -> 40
+Explanation:
+Rotate 1: 20 -> 30 -> 40 -> 50 -> 10
+Rotate 2: 30 -> 40 -> 50 -> 10 -> 20
+Rotate 3: 40 -> 50 -> 10 -> 20 -> 30
+Rotate 4: 50 -> 10 -> 20 -> 30 -> 40
+
+brute force Naive Approach] Shifting head node to the end k times – O(n * k) Time and O(1) Space
+To rotate a linked list to the left k places, we can repeatedly move the head node to the end of the linked list k times.
+
+ass Solution {
+    public Node rotate(Node head, int k) {
+        if (k == 0 || head == null)
+            return head;
+
+        // add code here
+        for(int i=0;i<k;++i){
+            Node curr=head;
+            while(curr.next!=null){
+                curr=curr.next;
+            }
+            curr.next=head;
+            curr=curr.next;
+            head=head.next;
+            curr.next=null;
+        }
+        return head;
+    }
+}
+
+optimal appraoch handle k by k=k%len
+class Solution {
+    public Node rotate(Node head, int k) {
+        // add code here
+        int len=1;
+        Node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+            len+=1;
+        }
+        k=k%len;
+        if (k == 0)
+            return head;
+            
+        temp.next=head;
+        temp=head;
+        for(int i=1;i<k;i++){
+            temp=temp.next;
+        }
+        head=temp.next;
+        temp.next=null;
+        return head;
+    }
+}
