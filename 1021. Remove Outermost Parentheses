@@ -1,0 +1,71 @@
+1021. Remove Outermost Parentheses
+Solved
+Easy
+Topics
+Companies
+Hint
+A valid parentheses string is either empty "", "(" + A + ")", or A + B, where A and B are valid parentheses strings, and + represents string concatenation.
+
+For example, "", "()", "(())()", and "(()(()))" are all valid parentheses strings.
+A valid parentheses string s is primitive if it is nonempty, and there does not exist a way to split it into s = A + B, with A and B nonempty valid parentheses strings.
+
+Given a valid parentheses string s, consider its primitive decomposition: s = P1 + P2 + ... + Pk, where Pi are primitive valid parentheses strings.
+
+Return s after removing the outermost parentheses of every primitive string in the primitive decomposition of s.
+
+ 
+
+Example 1:
+
+Input: s = "(()())(())"
+Output: "()()()"
+Explanation: 
+The input string is "(()())(())", with primitive decomposition "(()())" + "(())".
+After removing outer parentheses of each part, this is "()()" + "()" = "()()()".
+
+brute force
+using stack start iterating on string and then check if "(" and stisnotEmpty do append in string and also outside if put the character in stack 
+tc O(n) sc O(n)
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder res=new StringBuilder();
+        Stack<Character> st=new Stack<>();
+        for(char ch:s.toCharArray()){
+            if(ch=='('){
+                if(!st.isEmpty()){
+                    res.append(ch);
+                }
+                st.push(ch);
+            }else{
+                st.pop();
+                if(!st.isEmpty()){
+                    res.append(ch);
+                }
+            }
+        }
+        return res.toString();
+    }
+}
+
+optimal sol
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder res=new StringBuilder();
+       int open=0,start=0;
+       for(int i=0;i<s.length();i++){
+        if(s.charAt(i)=='('){
+            if(open==0){
+                start=i;
+            }
+            open++;
+        }else{
+            open--;
+        }
+        if(open==0){
+            res.append(s.substring(start+1,i));
+        }
+       }
+       return res.toString();
+    }
+}
